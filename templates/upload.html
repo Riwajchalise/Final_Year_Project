@@ -1,0 +1,186 @@
+<html>
+  <head>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+      html,
+      body {
+        height: 100%;
+        background-color: #2590eb;
+      }
+      .admin__header {
+        display: flex;
+        flex-basis: 100%;
+        grid-area: header;
+        height: 70px;
+        background-color: #fff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        position: relative;
+      }
+
+      .toolbar {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--spacing);
+      }
+
+      .logo {
+        display: flex;
+        flex: 0 0 250px;
+        height: 70px;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: 0;
+        color: #fff;
+        background-color: #dc5a60;
+        font-size: 1rem;
+      }
+      
+      .logo h1 {
+        margin: 0;
+      }
+
+      main {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .content {
+        max-width: 500px;
+      }
+      wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .wrapper .file-upload {
+        height: 200px;
+        width: 200px;
+        border-radius: 100px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 4px solid #ffffff;
+        overflow: hidden;
+        background-image: linear-gradient(to bottom, #2590eb 50%, #ffffff 50%);
+        background-size: 100% 200%;
+        transition: all 1s;
+        color: #ffffff;
+        font-size: 100px;
+      }
+      .wrapper .file-upload input[type="file"] {
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+      .wrapper .file-upload:hover {
+        background-position: 0 -100%;
+        color: #2590eb;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <h1>Data Processing</h1>
+                </br> -->
+    <script>
+      d3.csv("static/Book2.csv", function (data) {
+        console.log(data);
+      });
+    </script>
+    <!-- </br> -->
+    <!-- current user -->
+    <!-- <p> -->
+    <!-- {% if current_user.is_authenticated %}
+                     Hi {{ current_user.username }}!
+                {% endif %}
+                </p>
+                <p> Insert your CSV file and then download the Result  -->
+    <header class="admin__header">
+      <a href="#" class="logo">
+        <h1>Lead Predict</h1>
+      </a>
+      <div class="toolbar">
+        <button class="btn btn--primary"></button>
+        <a href="/logout" class="logout" style="color: red;">
+          Log Out
+        </a>
+      </div>
+    </header>
+    <form method="post" enctype="multipart/form-data">
+      <main>
+        <section class="content">
+          <div class="wrapper">
+            <div class="file-upload">
+              <input type="file" name="data_file" />
+              <i class="fa fa-arrow-up"></i>
+            </div>
+          </div>
+          <br />
+          <button
+            formaction="/transform"
+            type="submit"
+            class="btn btn-success btn-block btn-large"
+          >
+            Download Predicted Output
+          </button>
+          <button
+            formaction="/transform2"
+            type="showgraph"
+            class="btn btn-warning btn-block btn-large"
+          >
+            Show graph
+          </button>
+          <button
+            formaction="/logout"
+            type="submit"
+            class="btn btn-danger btn-block btn-large"
+          >
+            Logout
+          </button>
+        </section>
+      </main>
+      <!-- <div class="wrapper">
+                        <div class="file-upload">
+                          <input type="file" />
+                          <i class="fa fa-arrow-up"></i>
+                        </div>
+                            <button  formaction = "/transform" type="submit" class="btn btn-primary btn-block btn-large">Download Predicted Output</button>
+                            <button formaction = "/transform2" type="showgraph" class="btn btn-primary btn-block btn-large">Show graph</button>
+                            <button  formaction = "/logout" type="submit" class="btn btn-primary btn-block btn-large">Logout</button>
+                      </div>
+                       -->
+
+      <!-- <div>
+                        <div class="file-upload">
+                          <input type="file" name="data_file" class="btn btn-block"/>
+                          <i class="fa fa-arrow-up"></i>
+                        </div>
+                      </div>
+                      
+                    
+                    <button  formaction = "/transform" type="submit" class="btn btn-primary btn-block btn-large">Download Predicted Output</button>
+					<button formaction = "/transform2" type="showgraph" class="btn btn-primary btn-block btn-large">Show graph</button>
+                    <button  formaction = "/logout" type="submit" class="btn btn-primary btn-block btn-large">Logout</button> -->
+    </form>
+  </body>
+</html>
